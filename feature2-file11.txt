@@ -1,29 +1,29 @@
         ***Exp-7 spring boot rest api
-Main Application
+Main Application-SiddharthDemoApplication.java(class).
 package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
-public class SuchetaDemoApplication
+public class SiddharthDemoApplication
 {
 public static void main(String[] args)
 {
-SpringApplication.run(SuchetaDemoApplication.class, args);
+SpringApplication.run(SiddharthDemoApplication.class, args);
 }
 }
 REST Controller
 Create file:
-SuchetaController.java
+SiddharthController.java
 package com.example.demo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
-public class SuchetaController
+public class SiddharthController
 {
-@GetMapping("/welcomesucheta")
-public String welcomeSucheta()
+@GetMapping("/welcomesiddharth")
+public String welcomeSiddharth()
 {
-return "Hey Sucheta, This is your first Springboot Application running";
+return "Hey Siddharth, This is your first Springboot Application running";
 }
 }
           *******Exp-1 class and object
@@ -64,7 +64,7 @@ System.out.println("Name: " + name);
 public class ConstructorDemo {
 public static void main(String[] args) {
 Student s1 = new Student();
-Student s2 = new Student(101, "Amit");
+Student s2 = new Student(22, "Siddharth");
 s1.display();
 s2.display();
 }
@@ -102,3 +102,36 @@ students.remove(index);
 return "Student deleted successfully";
 }
 }
+
+postman if required 
+--1. GET Request
+Method:
+GET
+URL:
+http://localhost:8080/api/students
+Response:["Siddharth"]
+2. POST Request
+Method:
+POST
+URL:
+http://localhost:8080/api/students
+Body (Raw JSON):
+"Siddharth"
+Response:
+Student added successfully
+3. PUT Request
+Method:
+PUT
+URL:
+http://localhost:8080/api/students/0
+Body:
+"Siddharth"
+Response:
+Student updated successfully
+4. DELETE Request
+Method:
+DELETE
+URL:
+http://localhost:8080/api/students/0
+Response:
+student deleted successfully
