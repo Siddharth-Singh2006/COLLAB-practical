@@ -1,1 +1,104 @@
-
+        ***Exp-7 spring boot rest api
+Main Application
+package com.example.demo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootApplication
+public class SuchetaDemoApplication
+{
+public static void main(String[] args)
+{
+SpringApplication.run(SuchetaDemoApplication.class, args);
+}
+}
+REST Controller
+Create file:
+SuchetaController.java
+package com.example.demo;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class SuchetaController
+{
+@GetMapping("/welcomesucheta")
+public String welcomeSucheta()
+{
+return "Hey Sucheta, This is your first Springboot Application running";
+}
+}
+          *******Exp-1 class and object
+class Rectangle {
+int length;
+int width;
+int area;
+}
+public class Shape {
+public static void main(String args[]) {
+Rectangle rect = new Rectangle();
+rect.length = 20;
+rect.width = 30;
+rect.area = rect.length * rect.width;
+System.out.println("Length: " + rect.length);
+System.out.println("Width: " + rect.width);
+System.out.println("Area: " + rect.area);
+}
+}
+constructor                          class Student {
+int rollNo;
+String name;
+// Default Constructor
+Student() {
+rollNo = 0;
+name = "Not Assigned";
+}
+// Parameterized Constructor
+Student(int r, String n) {
+rollNo = r;
+name = n;
+}
+void display() {
+System.out.println("Roll No: " + rollNo);
+System.out.println("Name: " + name);
+}
+}
+public class ConstructorDemo {
+public static void main(String[] args) {
+Student s1 = new Student();
+Student s2 = new Student(101, "Amit");
+s1.display();
+s2.display();
+}
+}
+                ***Exp-8 postman
+Controller Class
+package com.example.demo;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+@RestController
+@RequestMapping("/api")
+public class StudentController {
+List<String> students = new ArrayList<>();
+// GET API
+@GetMapping("/students")
+public List<String> getStudents() {
+return students;
+}
+// POST API
+@PostMapping("/students")
+public String addStudent(@RequestBody String name) {
+students.add(name);
+return "Student added successfully";
+}
+// PUT API
+@PutMapping("/students/{index}")
+public String updateStudent(@PathVariable int index, @RequestBody String name) {
+students.set(index, name);
+return "Student updated successfully";
+}
+// DELETE API
+@DeleteMapping("/students/{index}")
+public String deleteStudent(@PathVariable int index) {
+students.remove(index);
+return "Student deleted successfully";
+}
+}
