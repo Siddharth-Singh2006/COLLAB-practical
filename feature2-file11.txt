@@ -1,436 +1,235 @@
-        ***Exp-7 spring boot rest api
-Main Application-SiddharthDemoApplication.java(class).
-package com.example.demo;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-@SpringBootApplication
-public class SiddharthDemoApplication
-{
-public static void main(String[] args)
-{
-SpringApplication.run(SiddharthDemoApplication.class, args);
-}
-}
-REST Controller
-Create file:
-SiddharthController.java
-package com.example.demo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-@RestController
-public class SiddharthController
-{
-@GetMapping("/welcomesiddharth")
-public String welcomeSiddharth()
-{
-return "Hey Siddharth, This is your first Springboot Application running";
-}
-}
-          *******Exp-1 class and object
-class Rectangle {
-int length;
-int width;
-int area;
-}
-public class Shape {
-public static void main(String args[]) {
-Rectangle rect = new Rectangle();
-rect.length = 20;
-rect.width = 30;
-rect.area = rect.length * rect.width;
-System.out.println("Length: " + rect.length);
-System.out.println("Width: " + rect.width);
-System.out.println("Area: " + rect.area);
-}
-}
-constructor                          class Student {
-int rollNo;
-String name;
-// Default Constructor
-Student() {
-rollNo = 0;
-name = "Not Assigned";
-}
-// Parameterized Constructor
-Student(int r, String n) {
-rollNo = r;
-name = n;
-}
-void display() {
-System.out.println("Roll No: " + rollNo);
-System.out.println("Name: " + name);
-}
-}
-public class ConstructorDemo {
-public static void main(String[] args) {
-Student s1 = new Student();
-Student s2 = new Student(22, "Siddharth");
-s1.display();
-s2.display();
-}
-}
-                ***Exp-8 postman
-Controller Class
-package com.example.demo;
-import org.springframework.web.bind.annotation.*;
-import java.util.*;
-@RestController
-@RequestMapping("/api")
-public class StudentController {
-List<String> students = new ArrayList<>();
-// GET API
-@GetMapping("/students")
-public List<String> getStudents() {
-return students;
-}
-// POST API
-@PostMapping("/students")
-public String addStudent(@RequestBody String name) {
-students.add(name);
-return "Student added successfully";
-}
-// PUT API
-@PutMapping("/students/{index}")
-public String updateStudent(@PathVariable int index, @RequestBody String name) {
-students.set(index, name);
-return "Student updated successfully";
-}
-// DELETE API
-@DeleteMapping("/students/{index}")
-public String deleteStudent(@PathVariable int index) {
-students.remove(index);
-return "Student deleted successfully";
-}
+Insertion and Deletion in Array Using Functions
+code:
+#include<stdio.h>
+#define MAX 100
+
+int a[MAX],n;
+
+void insert(){
+    int p,v;
+    printf("Enter position and value: ");
+    scanf("%d%d",&p,&v);
+    if(n>=MAX){ printf("Full\n"); return; }
+    for(int i=n;i>=p;i--) a[i]=a[i-1];
+    a[p-1]=v; n++;
 }
 
-postman if required 
---1. GET Request
-Method:
-GET
-URL:
-http://localhost:8080/api/students
-Response:["Siddharth"]
-2. POST Request
-Method:
-POST
-URL:
-http://localhost:8080/api/students
-Body (Raw JSON):
-"Siddharth"
-Response:
-Student added successfully
-3. PUT Request
-Method:
-PUT
-URL:
-http://localhost:8080/api/students/0
-Body:
-"Siddharth"
-Response:
-Student updated successfully
-4. DELETE Request
-Method:
-DELETE
-URL:
-http://localhost:8080/api/students/0
-Response:
-student deleted successfully
+void del(){
+    int p;
+    printf("Enter position to delete: ");
+    scanf("%d",&p);
+    for(int i=p-1;i<n-1;i++) a[i]=a[i+1];
+    n--;
+}
 
-**exp-2
+void display(){
+    for(int i=0;i<n;i++) printf("%d ",a[i]);
+    printf("\n");
+}
 
-class Calculator {
-int add(int a, int b) {
-return a + b;
-}
-double add(double a, double b) {
-return a + b;
-}
-int add(int a, int b, int c) {
-return a + b + c;
-}
-}
-public class MethodOverloadingDemo {
-public static void main(String[] args) {
-Calculator calc = new Calculator();
-System.out.println(calc.add(10, 20));
-System.out.println(calc.add(10.5, 20.5));
-System.out.println(calc.add(5, 10, 15));
-}
+int main(){
+    int i;
+    printf("Enter size: ");
+    scanf("%d",&n);
+    printf("Enter elements:\n");
+    for(i=0;i<n;i++) scanf("%d",&a[i]);
+
+    insert();
+    display();
+    del();
+    display();
+
+    return 0;
 }
 
 
-class Vehicle
-{
-void speed()
-{
-System.out.println("Vehicle speed is moderate");
+Array Implementation of Stack
+#include<stdio.h>
+
+int stack[100],n,top=-1;
+
+void push(){
+    int x;
+    if(top>=n-1) printf("Overflow\n");
+    else{
+        scanf("%d",&x);
+        stack[++top]=x;
+    }
 }
+
+void pop(){
+    if(top<0) printf("Underflow\n");
+    else printf("Popped %d\n",stack[top--]);
 }
-class Car extends Vehicle
-{
-@Override
-void speed()
-{
-System.out.println("Car speed is fast");
+
+void display(){
+    for(int i=top;i>=0;i--) printf("%d ",stack[i]);
+    printf("\n");
 }
-}
-public class MethodOverridingDemo
-{
-public static void main(String[] args)
-{
-Vehicle v = new Car();
-v.speed();
-}
+
+int main(){
+    int ch;
+    scanf("%d",&n);
+
+    do{
+        scanf("%d",&ch);
+        if(ch==1) push();
+        else if(ch==2) pop();
+        else if(ch==3) display();
+    }while(ch!=4);
+
+    return 0;
 }
 
 
-**exp6
-<!DOCTYPE html>
-<html>
-<head>
-<title>Responsive Login Form</title>
- <!-- Bootstrap CDN -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
- <style>
- body {
- background-color: #f2f2f2;
- }
- .login-box {
- margin-top: 100px;
- padding: 30px;
- background: white;
- border-radius: 10px;
- box-shadow: 0px 0px 10px gray;
- }
- </style>
-</head>
-<body>
-<div class="container">
- <div class="row justify-content-center">
- <div class="col-md-5 login-box">
- <h3 class="text-center">Login Form</h3>
- <form onsubmit="return validateForm()">
- <div class="mb-3">
- <label>Email</label>
- <input type="text" id="email" class="form-control">
- <small id="emailError" class="text-danger"></small>
- </div>
- <div class="mb-3">
- <label>Password</label>
- <input type="password" id="password" class="form-control">
- <small id="passError" class="text-danger"></small>
- </div>
- <button type="submit" class="btn btn-primary w-100">
- Login
- </button>
- <p id="successMsg" class="text-success text-center mt-3"></p>
- </form>
-</div>
- </div>
-</div>
-<script>
-function validateForm() {
- let email = document.getElementById("email").value;
- let password = document.getElementById("password").value;
- let valid = true;
- document.getElementById("emailError").innerHTML = "";
- document.getElementById("passError").innerHTML = "";
- document.getElementById("successMsg").innerHTML = "";
- if(email === "") {
- document.getElementById("emailError").innerHTML =
- "Email is required";
- valid = false;
- }
- if(password.length < 6) {
- document.getElementById("passError").innerHTML =
- "Password must be at least 6 characters";
- valid = false;
- }
- if(valid) {
- document.getElementById("successMsg").innerHTML =
- "Hi Sucheta, Your User’s Login Successful!";
- }
- return false;
-}
-</script>
-</body>
-</html>
-exp-11
-UserManagementSystem
-│
-├── src
-│ └── main
-│ ├── java
-│ │ └── com
-│ │ └── example
-│ │ └── demo
-│ │ │
-│ │ ├── DemoApplication.java
-│ │ │
-│ │ ├── controller
-│ │ │ └── SuchetaController.java
-│ │ │
-│ │ ├── service
-│ │ │ └── SuchetaUserService.java
-│ │ │
-│ │ ├── repository
-│ │ │ └── SuchetaUserRepository.java
-│ │ │
-│ │ └── model
-│ │ └── SuchetaUser.java
-│ │
-│ └── resources
-│ │
-│ ├── static
-│ │ └── index.html
-│ │
-│ └── application.properties
-└── pom.xml
+Singly Linked List (Insert, Delete, Display)
+#include<stdio.h>
+#include<stdlib.h>
 
+struct Node{
+    int data;
+    struct Node* next;
+};
 
-● Create SuchetaUser.java
-● Code
-package com.example.demo.model;
-import jakarta.persistence.*;
-@Entity
-public class SuchetaUser
-{
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-private String name;
-private String email;
-public SuchetaUser() {}
-public Long getId() { return id; }
-public void setId(Long id) { this.id = id; }
-public String getName() { return name; }
-public void setName(String name) { this.name = name; }
-public String getEmail() { return email; }
-public void setEmail(String email) { this.email = email; }
+void beg(struct Node** h,int x){
+    struct Node* n=malloc(sizeof(struct Node));
+    n->data=x; n->next=*h; *h=n;
 }
 
-🔹 Step 3: Create Repository
-● Create interface SuchetaUserRepository
-● Code
-package com.example.demo.repository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.model.SuchetaUser;
-public interface SuchetaUserRepository extends JpaRepository<SuchetaUser, Long>
-{ }
-
-Create SuchetaUserService
-● Code
-package com.example.demo.service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.example.demo.model.SuchetaUser;
-import com.example.demo.repository.SuchetaUserRepository;
-import java.util.List;
-@Service
-public class SuchetaUserService
-{
-@Autowired
-private SuchetaUserRepository repo;
-public List<SuchetaUser> getAllUsers()
-{
-return repo.findAll();
-}
-public SuchetaUser saveUser(SuchetaUser user)
-{
-return repo.save(user);
-}
-public void deleteUser(Long id)
-{
-repo.deleteById(id);
-}
+void end(struct Node** h,int x){
+    struct Node* n=malloc(sizeof(struct Node));
+    n->data=x; n->next=NULL;
+    if(!*h){ *h=n; return; }
+    struct Node* t=*h;
+    while(t->next) t=t->next;
+    t->next=n;
 }
 
-Step 5: Create Controller
-● Create SuchetaController
-● Code
-package com.example.demo.controller;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.example.demo.model.SuchetaUser;
-import com.example.demo.service.SuchetaUserService;
-import java.util.List;
-@CrossOrigin(origins = "*")
-@RestController
-@RequestMapping("/api/users")
-public class SuchetaController
-{
-@Autowired
-private SuchetaUserService service;
-@GetMapping
-public List<SuchetaUser> getUsers()
-{
-return service.getAllUsers();
+void delFirst(struct Node** h){
+    if(!*h) return;
+    struct Node* t=*h;
+    *h=t->next;
+    free(t);
 }
-@PostMapping
-public SuchetaUser addUser(@RequestBody SuchetaUser user)
-{
-return service.saveUser(user);
+
+void display(struct Node* h){
+    while(h){ printf("%d->",h->data); h=h->next; }
+    printf("NULL\n");
 }
-@DeleteMapping("/{id}")
-public String deleteUser(@PathVariable Long id)
-{
-service.deleteUser(id);
-return "User Deleted Successfully";
-}
+
+int main(){
+    struct Node* head=NULL;
+
+    beg(&head,10);
+    end(&head,20);
+    end(&head,30);
+
+    display(head);
+
+    delFirst(&head);
+    display(head);
+
+    return 0;
 }
 
 
-In application.properties:
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.h2.console.enabled=true
-spring.jpa.hibernate.ddl-auto=update
+Insertion Sort
+#include<stdio.h>
+
+int main(){
+    int a[100],n,i,j,temp;
+
+    scanf("%d",&n);
+    for(i=0;i<n;i++) scanf("%d",&a[i]);
+
+    for(i=1;i<n;i++){
+        temp=a[i];
+        j=i-1;
+        while(j>=0 && a[j]>temp){
+            a[j+1]=a[j];
+            j--;
+        }
+        a[j+1]=temp;
+    }
+
+    for(i=0;i<n;i++) printf("%d ",a[i]);
+
+    return 0;
+}
 
 
-● Code
-<!DOCTYPE html>
-<html>
-<head>
-<title>User Management System By Sucheta</title>
-<!-- Axios CDN -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-<h2>User Management System By Sucheta</h2>
-<input type="text" id="name" placeholder="Enter Name">
-<input type="email" id="email" placeholder="Enter Email">
-<br><br>
-<button onclick="addUser()">Add User</button>
-<button onclick="getUsers()">View Users</button>
-<ul id="userList"></ul>
-<script>
-function getUsers() {
-axios.get("http://localhost:8080/api/users")
-.then(res => {
-console.log(res.data);
-let list = document.getElementById("userList");
-list.innerHTML = "";
-res.data.forEach(u => {
-let li = document.createElement("li");
-li.innerText = u.name + " - " + u.email;
-list.appendChild(li);
-});
-})
-.catch(err => console.error(err));
+Binary Search
+#include<stdio.h>
+
+int main(){
+    int a[100],n,x,l=0,h,m,f=0;
+
+    scanf("%d",&n);
+    for(int i=0;i<n;i++) scanf("%d",&a[i]);
+
+    scanf("%d",&x);
+    h=n-1;
+
+    while(l<=h){
+        m=(l+h)/2;
+        if(a[m]==x){
+            printf("Found at %d",m+1);
+            f=1; break;
+        }
+        else if(a[m]<x) l=m+1;
+        else h=m-1;
+    }
+
+    if(!f) printf("Not found");
+
+    return 0;
 }
-function addUser() {
-let name = document.getElementById("name").value;
-let email = document.getElementById("email").value;
-axios.post("http://localhost:8080/api/users", {
-name: name,
-email: email
-})
-.then(() => {
-alert("Hi Sucheta, Your User Added Successfully!");
-getUsers();
-})
-.catch(err => console.error(err));
+
+
+Binary Search Tree + Traversals
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node *l,*r;
+};
+
+struct Node* insert(struct Node* t,int x){
+    if(!t){
+        t=malloc(sizeof(struct Node));
+        t->data=x; t->l=t->r=NULL;
+        return t;
+    }
+    if(x<t->data) t->l=insert(t->l,x);
+    else t->r=insert(t->r,x);
+    return t;
 }
-</script>
-</body>
-</html>
-Spring web spring data jpa h2 database
+
+void pre(struct Node* t){
+    if(t){ printf("%d ",t->data); pre(t->l); pre(t->r); }
+}
+
+void in(struct Node* t){
+    if(t){ in(t->l); printf("%d ",t->data); in(t->r); }
+}
+
+void post(struct Node* t){
+    if(t){ post(t->l); post(t->r); printf("%d ",t->data); }
+}
+
+int main(){
+    struct Node* root=NULL;
+    int a[]={1,2,3,4,5};
+
+    for(int i=0;i<5;i++) root=insert(root,a[i]);
+
+    pre(root);
+    printf("\n");
+    in(root);
+    printf("\n");
+    post(root);
+
+    return 0;
+}
+****end****
