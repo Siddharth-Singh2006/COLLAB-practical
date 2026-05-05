@@ -233,3 +233,71 @@ int main(){
     return 0;
 }
 ****end****
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *prev, *next;
+};
+
+struct Node* head = NULL;
+
+struct Node* create(int val) {
+    struct Node* n = (struct Node*)malloc(sizeof(struct Node));
+    n->data = val;
+    n->prev = n->next = NULL;
+    return n;
+}
+
+void insert(int val) {
+    struct Node* n = create(val);
+
+    if (head == NULL) {
+        head = n;
+        return;
+    }
+
+    struct Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = n;
+    n->prev = temp;
+}
+
+void display() {
+    struct Node* temp = head;
+    printf("Forward: ");
+    while (temp) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+void displayReverse() {
+    struct Node* temp = head;
+    if (!temp) return;
+
+    while (temp->next)
+        temp = temp->next;
+
+    printf("Reverse: ");
+    while (temp) {
+        printf("%d ", temp->data);
+        temp = temp->prev;
+    }
+    printf("\n");
+}
+
+int main() {
+    insert(10);
+    insert(20);
+    insert(30);
+
+    display();
+    displayReverse();
+
+    return 0;
+}
